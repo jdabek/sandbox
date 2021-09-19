@@ -1,0 +1,166 @@
+Git installation process 
+2021-09-19 / jdabek
+
+Installed for Windows 10.
+Prerequisites:
+* GitHub account.
+* Notepad++ installed.
+
+1. Go to:
+https://git-scm.com/download
+
+2. Download:
+Windows
+
+3. Install:
+Only changed:
+3.a Select Components:
+Checked: (NEW!) Add a Git Bash Profile to Windows Terminal
+3.b Choosing the default editor used by Git:
+Use Notepad++ as Git's default editor
+
+4. Open from Start Menu:
+Git Bash
+
+5. Gave commands in bash:
+git config --global user.name "FIRSTNAME LASTNAME"
+git config --global user.email "EMAIL.ADDRESS@EXAMPLE.COM"
+ssh-keygen -t rsa -b 4096 -C "EMAIL.ADDRESS@EXAMPLE.COM"
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_rsa
+
+6. Give command:
+cat ~/.ssh/id_rsa.pub
+
+7. Copy entire text:
+ssh-rsa ... EMAIL.ADDRESS@EXAMPLE.COM
+
+8. Log into:
+https://github.com/
+
+9. Go to:
+https://github.com/settings/keys
+
+10. Click:
+New SSH key
+
+11. Enter some descriptive name for:
+Title
+
+12. Paste above-copied text (step 7.) into:
+Key
+
+13. Click:
+Add SSH key
+
+14. Try that the connection works:
+ssh -T git@github.com
+
+15. Should get output similar to:
+Hi jdabek! You've successfully authenticated, but GitHub does not provide shell access.
+
+16. Give commands:
+cd ~/PATH/TO/YOUR/DOCS
+mkdir git
+cd git
+
+17. Try cloning a repository:
+git clone git@github.com:jdabek/mandelbrot.git
+
+18. Should get something like this:
+Cloning into 'mandelbrot'...
+remote: Enumerating objects: 19, done.
+remote: Counting objects: 100% (19/19), done.
+remote: Compressing objects: 100% (17/17), done.
+remote: Total 19 (delta 7), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (19/19), 14.09 MiB | 4.01 MiB/s, done.
+Resolving deltas: 100% (7/7), done.
+
+19. Now you are:
+Up and running.
+
+[You may also consider doing steps 34./35./36., and:
+git clone git@github.com:jdabek/sandbox.git
+]
+20. Make new repository: Give commands:
+cd ~/PATH/TO/YOUR/DOCS/git/
+mkdir sandbox
+cd sandbox
+
+21. Initialize the repository:
+git init
+
+22. Should get the output:
+Initialized empty Git repository in C:/Users/USER/PATH/TO/YOUR/DOCS/git/sandbox/.git/
+
+23. Make a file:
+start notepad++ play.txt
+
+24. Add text:
+Hello World!
+
+25. Finish editing:
+Save and close.
+
+[Note: when you have differences in existing files, you may use:
+git diff
+]
+26. Give command in Git Bash:
+status
+
+27. Observe output:
+-----
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        play.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+-----
+
+28. Give command:
+git add play.txt
+
+29. Give command:
+git status
+
+30. Observe state:
+-----
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   play.txt
+-----
+
+31. Make commit with message:
+git commit -m "Initial version of sandbox"
+
+32. Give command:
+git log
+
+33. Observe log:
+-----
+commit 0a1ec8624238b3a8a095d5f622334f3ce394f939 (HEAD -> master)
+Author: FIRSTNAME LASTNAME <EMAIL.ADDRESS@EXAMPLE.COM>
+Date:   Sun Sep 19 15:21:55 2021 +0300
+
+    Initial version of sandbox
+-----
+
+34. Make a new repository at your GitHub page:
+https://github.com/jdabek?tab=repositories
+
+35. Clik New: Give Repository name:
+sandbox
+
+36. Click:
+Create repository
+
+37. Push your local repository to the remote one:
+git push -u git@github.com:jdabek/sandbox.git
