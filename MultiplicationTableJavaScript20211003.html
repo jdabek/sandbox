@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Multiplication Table JavaScript 2021-10-03</title>
+<style>
+.cellrow{
+    height: 44px;
+    width: 484px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-around;
+    text-align: center;
+}
+.cellele{
+    flex-basis: 40px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    line-height: 40px;
+    margin: 2px 2px;
+    background: #00000033;
+    font-size: 25px;
+}
+.paintele{
+    background: #00ffff33;
+}
+</style>
+
+<script>
+function resetAllClasses(){
+   for(var i = 1; i < 11; i++){
+        for(var j = 1; j < 11; j++){
+            id = 'ele-' + i + '-' + j;
+            ele = document.getElementById(id);
+            ele.className = 'cellele';
+            ele.innerHTML = '';
+        }
+    }
+}
+function getMultiplication(){
+    if(!e) var e = window.event;
+    var ele = e.target || esrcElement;
+    if(!ele)
+        return;
+    var i = parseInt(ele.id.split('-')[1]);
+    var j = parseInt(ele.id.split('-')[2]);
+    if(i == 0 || j == 0)
+        return;
+    resetAllClasses();
+    for(var a = 1; a <= i; a++){
+        for(var b = 1; b <= j; b++){
+            eleab = document.getElementById('ele-' + a + '-' + b);
+            eleab.classList.add('paintele');
+        }
+    }
+    ele.innerHTML = '' + i*j;
+}
+function tableCreate(){
+    var body = document.body;
+
+    for(var i = 0; i < 11; i++){
+        var base = document.createElement('div');
+        base.className = 'cellrow';
+        for(var j = 0; j < 11; j++){
+            var ele = document.createElement('div');
+            if(i == 0 && j > 0)
+                ele.innerHTML = '' + j;
+            else if(j == 0 && i > 0)
+                ele.innerHTML = '' + i;
+            else
+                ele.innerHTML = '';
+            ele.id = 'ele-' + i + '-' + j;
+            ele.className = 'cellele';
+            ele.onclick = function(){getMultiplication();};
+            base.appendChild(ele);
+        }
+        body.appendChild(base);
+    }
+}
+document.addEventListener("DOMContentLoaded", function(){
+    tableCreate();
+});
+</script>
+</head>
+
+<body>
+
+<h1>Multiplication table: click the grid!</h1>
+
+</body>
+</html>
+
